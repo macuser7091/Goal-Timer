@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goal Timer</title>
+  <link rel="stylesheet" href="style2.css">
+  <!-- <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .goal-form {
+      margin-bottom: 20px;
+    }
+    .goal-list {
+      list-style: none;
+      padding: 0;
+    }
+    .goal-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style> -->
+</head>
+
+<body>
+  <h1>Goal Timer</h1>
+  <div class="box">
+    <div class="goal-form">
+      <input type="text" id="goalInput" placeholder="Enter your goal">
+      <input type="date" id="deadlineInput">
+      <button class="btn" onclick="addGoal()">Add Goal</button>
+    </div>
+    <ul class="goal-list" id="goalList"></ul>
+    <!-- <li class="goal-item"></li> -->
+  </div>
+
+  <script>
+    let goals = JSON.parse(localStorage.getItem('goals')) || [];
+
+    function addGoal() {
+      const goalInput = document.getElementById('goalInput');
+      const deadlineInput = document.getElementById('deadlineInput');
+
+      if (goalInput.value && deadlineInput.value) {
+        const goal = {
+          id: Date.now(),
+          text: goalInput.value,
+          deadline: new Date(deadlineInput.value).getTime(),
+        };
+        goals.push(goal);
+        localStorage.setItem('goals', JSON.stringify(goals));
+        renderGoals();
+        goalInput.value = '';
+        deadlineInput.value = '';
+      }
+    }
+
+    function renderGoals() {
+      const goalList = document.getElementById('goalList');
+      goalList.innerHTML = '';
+      goals.forEach((goal) => {
+        const li = document.createElement('li');
+        li.className = 'goal-item';
+        li.innerHTML = `
+          <strong>${goal.text}</strong>
+          <div>Time left: <span class="timer" data-deadline="${goal.deadline}"></span></div>
+           
+          <img src="delete.png" alt="Delete Goal" onclick="deleteGoal(${goal.id})" class="goal-image">
+        `;
+        goalList.appendChild(li);
+      });
+      updateTimers();
+    }
+
+    function updateTimers() {
+      const timers = document.querySelectorAll('.timer');
+      timers.forEach((timer) => {
+        const deadline = parseInt(timer.getAttribute('data-deadline'));
+        const now = new Date().getTime();
+        const timeLeft = deadline - now;
+
+        if (timeLeft > 0) {
+          const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+          timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        } else {
+          timer.innerHTML = 'Goal expired!';
+        }
+      });
+    }
+
+    function deleteGoal(id) {
+      goals = goals.filter((goal) => goal.id !== id);
+      localStorage.setItem('goals', JSON.stringify(goals));
+      renderGoals();
+    }
+
+    // Render goals on page load
+    renderGoals();
+    // Update timers every second
+    setInterval(updateTimers, 1000);
+  </script>
+</body>
+
+</html>

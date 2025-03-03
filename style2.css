@@ -1,0 +1,178 @@
+body {
+    margin: auto;
+    padding: 0;
+    max-width: 1200px;
+    background: url(https://getmarlee.com/blog/goal-setting/opengraph-image-1h53k4?cf83a9a42061e154=) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+}
+
+.goal-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 240px;
+    height: 200px;
+    gap: 20px;
+    border: 1px solid #787777;
+    border-radius: 7px;
+    padding: 7px;
+    margin: 7px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.goal-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+#goalInput {
+    padding: 4px;
+    border-radius: 7px;
+    border: 1px solid black;
+    width: 145px;
+}
+
+#deadlineInput {
+    padding: 4px;
+    border-radius: 7px;
+    border: 1px solid black;
+}
+
+.btn {
+    padding: 7px 20px;
+    border-radius: 7px;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.goal-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+    width: 100%; /* Full width */
+    /* Center the goals */
+}
+
+.goal-item {
+    list-style: none;
+    border: 1px solid #787777;
+    width: 200px; /* Fixed width for each goal item */
+    height: 200px; /* Fixed height for each goal item */
+    margin: 7px;
+    padding: 7px;
+    text-align: center;
+    border-radius: 7px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+strong {
+    font-size: 23px;
+    display: block;
+    padding: 15px 0;
+}
+
+li div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+li button {
+    margin-top: 20px;
+}
+
+.goal-image {
+    width: 20px;
+    margin-top: 24px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 3px 37px;
+    background-color: white;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    /* align-items: center; */
+    gap: 20px;
+    /* margin: auto; */
+}
+
+/* Media Queries for Phone Screens */
+@media only screen and (max-width: 600px) {
+    .box {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .goal-form {
+        width: 84%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .goal-list {
+        width: 100%; /* Full width on phones */
+        justify-content: center; /* Center the goals */
+        gap: 7px;
+    }
+
+    .goal-item {
+        width: calc(45% - 40px); /* Two goals per line with gap */
+        height: 180px; /* Fixed height */
+        margin: 7px;
+        padding: 15px;
+    }
+
+    #goalInput, #deadlineInput {
+        width: 90%;
+    }
+
+    .btn {
+        width: 40%;
+        padding: 10px;
+    }
+
+    strong {
+        font-size: 20px;
+    }
+
+    .goal-image {
+        width: 25px;
+        padding: 5px 40px;
+    }
+}
