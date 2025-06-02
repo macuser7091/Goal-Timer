@@ -3,7 +3,8 @@ body {
     padding: 0;
     max-width: 1200px;
     background: url(https://img.freepik.com/premium-vector/concept-goals-mind-map-handwritten-style_102583-6067.jpg) no-repeat;
-    background-size: cover;
+    background-size: 80vw;
+    background-position-x: center;
     background-attachment: fixed;
     height: 100vh;
 }
